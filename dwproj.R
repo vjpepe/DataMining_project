@@ -81,7 +81,7 @@ test2 = df %>%
 
 testing = test2 %>% 
   select(weeks, playerID, FD.points, test_val2)  %>% 
-  filter(playerID == '00-0031407')
+  filter(playerID == '00-0020531')
 
 
 
