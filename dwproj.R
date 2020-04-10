@@ -3,6 +3,7 @@ install.packages('dplyr')
 install.packages('dummies')
 install.packages('caTools')
 install.packages('data.table')
+install.packages('roll')
 
 # load libraries
 library(dplyr)
@@ -10,6 +11,7 @@ library(dummies)
 library(caTools)
 library(purrr)
 library(data.table)
+library(roll)
 
 # read
 data_url = "https://raw.githubusercontent.com/zzhangusf/Predicting-Fantasy-Football-Points-Using-Machine-Learning/master/data/aggregated_2015.csv"
@@ -65,16 +67,25 @@ testign = df %>%
 ####### rolling average function
 rolling_average = function(dframe, window) {
   x = runmean(dframe, window)
-  return(shift(x, -1))
+  x = roll_mean(dframe, width = window, min_obs = 1)
+  return(shift(x, 1))
+  #return(x)
 }
 
-rolling_average(df$FD.points, 16)
-
-test = df[ ,c(1,2,9,13)]
+# test = df[ ,c(1,2,9,13)]
 
 test2 = df %>% 
+  arrange(playerID, desc(weeks)) %>% 
   group_by(playerID) %>% 
-  mutate(test_val = rolling_average(FD.points, 16))
+  mutate(test_val2 = rolling_average(FD.points, 4))
 
 testing = test2 %>% 
-  select(weeks, playerID, FD.points, test_val)
+  select(weeks, playerID, FD.points, test_val2)  %>% 
+  filter(playerID == '00-0031407')
+
+
+
+
+
+
+
