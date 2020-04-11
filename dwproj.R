@@ -75,13 +75,12 @@ rolling_average = function(dframe, window) {
 # test = df[ ,c(1,2,9,13)]
 
 test2 = df %>% 
-  arrange(playerID, desc(weeks)) %>% 
   group_by(playerID) %>% 
   mutate(test_val2 = rolling_average(FD.points, 4))
 
 testing = test2 %>% 
   select(weeks, playerID, FD.points, test_val2)  %>% 
-  filter(playerID == '00-0020531')
+  filter(playerID == '00-0031407')
 
 
 ##### branch testing #####
