@@ -5,6 +5,7 @@ install.packages('caTools')
 install.packages('data.table')
 install.packages('roll')
 install.packages('imputeTS')
+install.packages('tidymodels')
 
 # load libraries
 library(tidyverse)
@@ -75,9 +76,9 @@ quarterback <- new_df %>%
   .[,c(1, 3:10, 14:27, 66, 68:71)] %>%
   na_replace(0)
 
-qb_standard <- quarterback[, c(2, 8:28)]
+qb_standard <- quarterback
 
-qb_standard[, 2:22] <- scale(quarterback[, 8:28], center = T, scale = T)
+qb_standard[, 8:28] <- scale(quarterback[, 8:28], center = T, scale = T)
 
 # Split into test and train
 qb_split <- qb_standard %>% 
@@ -93,9 +94,9 @@ runningback <- new_df %>%
   .[, c(1, 3:10, 21:44, 66, 68:71)] %>% 
   na_replace(0)
 
-rb_standard <- runningback[, c(2, 8:38)]
+rb_standard <- runningback
 
-rb_standard[, 2:32] <- scale(runningback[, 8:38], center = T, scale = T)
+rb_standard[, 8:38] <- scale(runningback[, 8:38], center = T, scale = T)
 
 # Split into test and train
 rb_split <- rb_standard %>% 
@@ -111,9 +112,9 @@ wide_receiver <- new_df %>%
   .[, c(1, 3:10, 21:44, 66, 68:71)] %>% 
   na_replace(0)
 
-wr_standard <- wide_receiver[, c(2, 8:38)]
+wr_standard <- wide_receiver
 
-wr_standard[, 2:32] <- scale(wide_receiver[, 8:38], center = T, scale = T)
+wr_standard[, 8:38] <- scale(wide_receiver[, 8:38], center = T, scale = T)
 
 # Split into test and train
 wr_split <- wr_standard %>% 
@@ -129,9 +130,9 @@ tight_end <- new_df %>%
   .[, c(1, 3:10, 28:34, 66, 68:71)] %>% 
   na_replace(0)
 
-te_standard <- tight_end[, c(2, 8:21)]
+te_standard <- tight_end
 
-te_standard[, 2:15] <- scale(tight_end[, 8:21], center = T, scale = T)
+te_standard[, 8:21] <- scale(tight_end[, 8:21], center = T, scale = T)
 
 # Split into test and train
 te_split <- te_standard %>% 
@@ -147,9 +148,9 @@ kicker <- new_df %>%
   .[, c(1, 3:10, 45:53, 66, 68:71)] %>% 
   na_replace(0)
 
-pk_standard <- kicker[, c(2, 8:23)]
+pk_standard <- kicker
 
-pk_standard[, 2:17] <- scale(kicker[, 8:23], center = T, scale = T)
+pk_standard[, 8:23] <- scale(kicker[, 8:23], center = T, scale = T)
 
 # Split into test and train
 pk_split <- pk_standard %>% 
